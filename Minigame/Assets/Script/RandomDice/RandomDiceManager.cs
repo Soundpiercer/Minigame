@@ -17,6 +17,8 @@ public class RandomDiceManager : MonoBehaviour
     public PathFunction path;
     public float offsetPerSecond;
 
+    private List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
+
     private void Start()
     {
         StartCoroutine(GameProcessEnumerator());
@@ -43,5 +45,6 @@ public class RandomDiceManager : MonoBehaviour
     {
         EnemyDiceBehaviour enemy = Instantiate(enemyDicePrefab, path.startPoint, Quaternion.identity, enemyDiceRoot).GetComponent<EnemyDiceBehaviour>();
         enemy.Init(path, offsetPerSecond);
+        enemies.Add(enemy);
     }
 }

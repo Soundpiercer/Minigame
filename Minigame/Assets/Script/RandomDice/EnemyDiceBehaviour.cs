@@ -2,8 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using TMPro;
+
 public class EnemyDiceBehaviour : MonoBehaviour
 {
+    public int hp;
+    public TMP_Text hpText;
+
     private float offset;
 
     private PathFunction path;
