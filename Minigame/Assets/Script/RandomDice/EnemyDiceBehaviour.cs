@@ -7,9 +7,11 @@ using TMPro;
 public class EnemyDiceBehaviour : MonoBehaviour
 {
     public int hp;
+    public int maxHP;
     public TMP_Text hpText;
 
-    private float offset;
+    // the offset of the dice in the path. 0 to 1.
+    public float offset;
 
     private PathFunction path;
     private float offsetPerSecond;
@@ -20,6 +22,9 @@ public class EnemyDiceBehaviour : MonoBehaviour
     {
         this.path = path;
         this.offsetPerSecond = offsetPerSecond;
+
+        maxHP = hp;
+        hpText.text = hp.ToString();
 
         StartCoroutine(MoveEnumerator());
     }
@@ -32,6 +37,20 @@ public class EnemyDiceBehaviour : MonoBehaviour
             transform.position = path.Lerp(offset);
 
             yield return new WaitForSeconds(ONE_FRAME_FACTOR);
+        }
+    }
+
+    /// <summary>
+    /// get attacked
+    /// </summary>
+    public void ReduceHP(int amount)
+    {
+        hp = Mathf.Clamp(hp - amount, 0, maxHP);
+        hpText.text = hp.ToString();
+
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class RandomDiceManager : MonoBehaviour
 {
+    #region Simple Singleton
+    public static RandomDiceManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
+            Destroy(gameObject);
+    }
+    #endregion
+
     [Header("Stage Control")]
     public int spawnAmount;
     public float spawnInterval;
@@ -17,7 +29,8 @@ public class RandomDiceManager : MonoBehaviour
     public PathFunction path;
     public float offsetPerSecond;
 
-    private List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
+    [HideInInspector]
+    public List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
 
     private void Start()
     {
