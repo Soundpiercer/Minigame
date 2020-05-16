@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Minigame
 {
@@ -13,7 +14,7 @@ namespace Minigame
 
         public void RandomDice()
         {
-
+            SceneManager.LoadScene("RandomDice");
         }
 
         public void Archero()
