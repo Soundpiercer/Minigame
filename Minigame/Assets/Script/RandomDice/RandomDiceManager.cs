@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RandomDiceManager : MonoBehaviour
 {
@@ -16,10 +17,18 @@ public class RandomDiceManager : MonoBehaviour
     }
     #endregion
 
-    [Header("Stage Control")]
+    [Header("Stage Control/Enemy")]
     public int spawnAmount;
     public float spawnInterval;
     public float standbyTime;
+
+    [Header("Stage Control/Shooter")]
+    public int maximumShooterCount;
+    private int shooterCount;
+
+    [Header("Shooter")]
+    public GameObject shooterDicePrefab;
+    public Transform shooterDiceRoot;
 
     [Header("Enemy")]
     public GameObject enemyDicePrefab;
@@ -54,10 +63,27 @@ public class RandomDiceManager : MonoBehaviour
         }
     }
 
-    public void CreateEnemy()
+    private void CreateEnemy()
     {
         EnemyDiceBehaviour enemy = Instantiate(enemyDicePrefab, path.startPoint, Quaternion.identity, enemyDiceRoot).GetComponent<EnemyDiceBehaviour>();
         enemy.Init(path, offsetPerSecond);
         enemies.Add(enemy);
+    }
+
+    public void AddDiceAtRandomLocation()
+    {
+        if (shooterCount >= maximumShooterCount)
+            return;
+
+        float x = Random.Range(-4f, 4f);
+        float y = Random.Range(-4f, 4f);
+
+        Instantiate(shooterDicePrefab, new Vector3(x, y, 0), Quaternion.identity, shooterDiceRoot);
+        shooterCount++;
+    }
+
+    public void Exit()
+    {
+        SceneManager.LoadScene("Title");
     }
 }
