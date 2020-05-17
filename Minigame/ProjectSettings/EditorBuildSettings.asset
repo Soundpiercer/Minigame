@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 48a2ac438ee914f3783479a0311b177e
+  - enabled: 1
+    path: Assets/Scenes/RandomDice.unity
+    guid: 10026d43344214a0db52ee1f6b3bc323
   m_configObjects: {}
