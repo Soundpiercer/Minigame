@@ -407,5 +407,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 50
-  attackInterval: 0.4
+  attackInterval: 0.3
   beamQuad: {fileID: 2568576384291491712}

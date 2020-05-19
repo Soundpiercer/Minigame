@@ -23,7 +23,6 @@ public class RandomDiceManager : MonoBehaviour
     public float standbyTime;
 
     [Header("Stage Control/Shooter")]
-    public int maximumShooterCount;
     private int shooterCount;
 
     [Header("Shooter")]
@@ -39,11 +38,29 @@ public class RandomDiceManager : MonoBehaviour
     public float offsetPerSecond;
 
     [HideInInspector]
+    public DiceSlot[] diceSlots = new DiceSlot[NUMBER_OF_SLOTS];
+
+    [HideInInspector]
     public List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
+
+    private const int NUMBER_OF_SLOTS = 15;
 
     private void Start()
     {
+        InitDiceSlots();
         StartCoroutine(GameProcessEnumerator());
+    }
+
+    private void InitDiceSlots()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                diceSlots[3 * i + j].position = new Vector3(-6 + 2 * i, -6 + 2 * j, 0);
+                diceSlots[3 * i + j].isOccupied = false;
+            }
+        }
     }
 
     private IEnumerator GameProcessEnumerator()
@@ -70,15 +87,27 @@ public class RandomDiceManager : MonoBehaviour
         enemies.Add(enemy);
     }
 
-    public void AddDiceAtRandomLocation()
+    public void AddDiceAtRandomSlot()
     {
-        if (shooterCount >= maximumShooterCount)
+        if (shooterCount >= NUMBER_OF_SLOTS)
             return;
 
-        float x = Random.Range(-4f, 4f);
-        float y = Random.Range(-4f, 4f);
+        // Find Random Unoccupied Slot
+        DiceSlot targetSlot = new DiceSlot();
 
-        Instantiate(shooterDicePrefab, new Vector3(x, y, 0), Quaternion.identity, shooterDiceRoot);
+        while (true)
+        {
+            int index = Random.Range(0, NUMBER_OF_SLOTS);
+            if (diceSlots[index].isOccupied == false)
+            {
+                diceSlots[index].isOccupied = true;
+                targetSlot = diceSlots[index];
+                break;
+            }
+        }
+
+        // Instantiate Shooter Dice
+        Instantiate(shooterDicePrefab, targetSlot.position, Quaternion.identity, shooterDiceRoot);
         shooterCount++;
     }
 

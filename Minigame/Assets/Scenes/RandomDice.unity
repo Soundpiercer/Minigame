@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -154,7 +154,6 @@ MonoBehaviour:
   spawnAmount: 10
   spawnInterval: 1
   standbyTime: 2
-  maximumShooterCount: 10
   shooterDicePrefab: {fileID: 3404342815644802478, guid: 98c97240701f4411a8a9d437a392ffc9,
     type: 3}
   shooterDiceRoot: {fileID: 265706618}
@@ -311,7 +310,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 26160450}
-        m_MethodName: AddDiceAtRandomLocation
+        m_MethodName: AddDiceAtRandomSlot
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShooterDiceBehaviour : MonoBehaviour
 {
     public int power;
-    public float attackInterval = 0.4f;
+    public float attackInterval = 0.3f;
 
     public GameObject beamQuad;
 
