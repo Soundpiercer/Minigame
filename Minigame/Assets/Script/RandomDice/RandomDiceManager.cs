@@ -38,7 +38,7 @@ public class RandomDiceManager : MonoBehaviour
     public float offsetPerSecond;
 
     [HideInInspector]
-    public DiceSlot[] diceSlots = new DiceSlot[NUMBER_OF_SLOTS];
+    public DiceSlot[] diceSlots = new DiceSlot[15];
 
     [HideInInspector]
     public List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
@@ -57,8 +57,7 @@ public class RandomDiceManager : MonoBehaviour
         {
             for (int j = 0; j < 3; j++)
             {
-                diceSlots[3 * i + j].position = new Vector3(-6 + 2 * i, -6 + 2 * j, 0);
-                diceSlots[3 * i + j].isOccupied = false;
+                diceSlots[3 * i + j] = new DiceSlot(new Vector3(-4 + 2 * i, 2 * j, 0), false);
             }
         }
     }
