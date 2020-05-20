@@ -10,6 +10,7 @@ namespace RandomDice
     {
         public GameProcessController gameProcessController;
         public GameObject addDiceButton;
+        public Text phaseText;
         public Text SPText;
         public Text requiredSPText;
 
@@ -23,9 +24,19 @@ namespace RandomDice
             gameProcessController.AddDiceAtRandomSlot();
         }
 
+        public void NextPhase()
+        {
+            gameProcessController.InitNextPhase();
+        }
+
         public void Exit()
         {
             SceneManager.LoadScene("Title");
+        }
+
+        public void ShowPhaseNumber(int phaseNumber)
+        {
+            phaseText.text = "Phase " + phaseNumber;
         }
 
         public void ShowSP(int sp)

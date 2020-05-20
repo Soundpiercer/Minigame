@@ -6,12 +6,9 @@ namespace RandomDice
 {
     public class GameProcessController : MonoBehaviour
     {
-        [Header("Stage Control/Standby Time")]
-        public float standbyTime;
-
-        [Header("Stage Control/Enemy")]
-        public int spawnAmount;
-        public float spawnInterval;
+        [Header("Phase")]
+        public int phaseNumber;
+        public Phase phase;
 
         [Header("Stage Control/Shooter")]
         private int shooterCount;
@@ -26,28 +23,45 @@ namespace RandomDice
 
         [Header("Path Function")]
         public PathFunction path;
-        public float offsetPerSecond;
 
-        [HideInInspector]
-        public DiceSlot[] diceSlots = new DiceSlot[15];
+        private DiceSlot[] diceSlots;
 
         private const int NUMBER_OF_SLOTS = 15;
+        private const float STANDBY_TIME = 1.0f;
 
         public void Init()
         {
-            InitRandomDiceManager();
+            BuildStage();
+
             InitDiceSlots();
+            InitRandomDiceManager();
+
             StartCoroutine(GameProcessEnumerator());
+        }
+
+        public void InitNextPhase()
+        {
+            if (phaseNumber < RandomDiceManager.Instance.phases.Length)
+            {
+                BuildStage();
+                phaseNumber++;
+
+                StartCoroutine(GameProcessEnumerator());
+            }
         }
 
         private void InitRandomDiceManager()
         {
+            RandomDiceManager.Instance.CurrentPhase = phase;
+
             RandomDiceManager.Instance.SP = 100;
             RandomDiceManager.Instance.RequiredSPToSpawn = 10;
         }
 
         private void InitDiceSlots()
         {
+            diceSlots = new DiceSlot[NUMBER_OF_SLOTS];
+
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 3; j++)
@@ -57,27 +71,35 @@ namespace RandomDice
             }
         }
 
+        private void BuildStage()
+        {
+            phase = RandomDiceManager.Instance.phases[phaseNumber];
+            phaseNumber = phase.phaseNumber;
+
+            RandomDiceManager.Instance.enemies = new List<EnemyDiceBehaviour>();
+        }
+
         private IEnumerator GameProcessEnumerator()
         {
             // standby
-            yield return new WaitForSeconds(standbyTime);
+            yield return new WaitForSeconds(STANDBY_TIME);
 
             // game start
             int count = 0;
 
-            while (count < spawnAmount)
+            while (count < phase.spawnAmount)
             {
                 CreateEnemy();
                 count++;
 
-                yield return new WaitForSeconds(spawnInterval);
+                yield return new WaitForSeconds(phase.spawnInterval);
             }
         }
 
         private void CreateEnemy()
         {
             EnemyDiceBehaviour enemy = Instantiate(enemyDicePrefab, path.startPoint, Quaternion.identity, enemyDiceRoot).GetComponent<EnemyDiceBehaviour>();
-            enemy.Init(path, offsetPerSecond);
+            enemy.Init(path, phase.offsetPerSecond);
             RandomDiceManager.Instance.enemies.Add(enemy);
         }
 
