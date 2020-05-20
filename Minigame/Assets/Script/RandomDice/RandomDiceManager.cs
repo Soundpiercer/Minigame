@@ -19,7 +19,29 @@ namespace RandomDice
         }
         #endregion
 
-        [HideInInspector]
+        public RandomDiceController controller;
+
         public List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
+
+        private int sp;
+        public int SP
+        {
+            get { return sp; }
+            set
+            {
+                sp = value;
+                controller.ShowSP(sp);
+            }
+        }
+        private int requiredSPToSpawn;
+        public int RequiredSPToSpawn
+        {
+            get { return requiredSPToSpawn; }
+            set
+            {
+                requiredSPToSpawn = value;
+                controller.ShowRequiredSPToSpawn(requiredSPToSpawn);
+            }
+        }
     }
 }

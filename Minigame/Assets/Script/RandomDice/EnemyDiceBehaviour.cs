@@ -55,5 +55,10 @@ namespace RandomDice
                 Destroy(gameObject);
             }
         }
+
+        private void OnDestroy()
+        {
+            RandomDiceManager.Instance.SP += 10;
+        }
     }
 }

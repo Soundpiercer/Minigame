@@ -96,6 +96,10 @@ namespace RandomDice
             // Instantiate Shooter Dice
             Instantiate(shooterDicePrefab, targetSlot.position, Quaternion.identity, shooterDiceRoot);
             shooterCount++;
+
+            // Increase Required SP To Spawn
+            RandomDiceManager.Instance.SP -= RandomDiceManager.Instance.RequiredSPToSpawn;
+            RandomDiceManager.Instance.RequiredSPToSpawn += 10;
         }
     }
 }
