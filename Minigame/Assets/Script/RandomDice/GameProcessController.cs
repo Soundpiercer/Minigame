@@ -35,8 +35,15 @@ namespace RandomDice
 
         public void Init()
         {
+            InitRandomDiceManager();
             InitDiceSlots();
             StartCoroutine(GameProcessEnumerator());
+        }
+
+        private void InitRandomDiceManager()
+        {
+            RandomDiceManager.Instance.SP = 100;
+            RandomDiceManager.Instance.RequiredSPToSpawn = 10;
         }
 
         private void InitDiceSlots()
