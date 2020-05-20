@@ -52,13 +52,14 @@ namespace RandomDice
 
             if (hp <= 0)
             {
-                Destroy(gameObject);
+                Retire();
             }
         }
 
-        private void OnDestroy()
+        private void Retire()
         {
             RandomDiceManager.Instance.SP += 10;
+            Destroy(gameObject);
         }
     }
 }
