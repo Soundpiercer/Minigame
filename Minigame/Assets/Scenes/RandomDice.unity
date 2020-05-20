@@ -151,17 +151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a28bd6ff2c6404993efdd56b82b601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAmount: 10
-  spawnInterval: 1
-  standbyTime: 2
-  shooterDicePrefab: {fileID: 3404342815644802478, guid: 98c97240701f4411a8a9d437a392ffc9,
-    type: 3}
-  shooterDiceRoot: {fileID: 265706618}
-  enemyDicePrefab: {fileID: 5058587758433002409, guid: d1ff556a070774f54837b81b26a26724,
-    type: 3}
-  enemyDiceRoot: {fileID: 1554762252}
-  path: {fileID: 26160452}
-  offsetPerSecond: 0.125
   enemies: []
 --- !u!4 &26160451
 Transform:
@@ -173,11 +162,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 265706618}
-  - {fileID: 1554762252}
+  m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &26160452
 MonoBehaviour:
@@ -220,11 +207,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 265706617}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 26160451}
+  m_Father: {fileID: 1844994915}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &336191035
@@ -309,8 +296,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 26160450}
-        m_MethodName: AddDiceAtRandomSlot
+      - m_Target: {fileID: 1330971538}
+        m_MethodName: AddDice
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -682,6 +669,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581220767}
   m_CullTransparentMesh: 0
+--- !u!1 &1330971537
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1330971539}
+  - component: {fileID: 1330971538}
+  m_Layer: 0
+  m_Name: RandomDiceController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1330971538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330971537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee50f79cf1a9643ecbf4f69fd53b931e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameProcessController: {fileID: 1844994913}
+--- !u!4 &1330971539
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330971537}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1844994915}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1391948274
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +873,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 26160450}
+      - m_Target: {fileID: 1330971538}
         m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
@@ -915,8 +947,83 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 26160451}
+  m_Father: {fileID: 1844994915}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1844994912
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1844994915}
+  - component: {fileID: 1844994913}
+  - component: {fileID: 1844994914}
+  m_Layer: 0
+  m_Name: GameProcessController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1844994913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844994912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe62caa7ce9484af4a65a1fd55f10b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standbyTime: 1
+  spawnAmount: 10
+  spawnInterval: 1
+  shooterDicePrefab: {fileID: 3404342815644802478, guid: 98c97240701f4411a8a9d437a392ffc9,
+    type: 3}
+  shooterDiceRoot: {fileID: 265706618}
+  enemyDicePrefab: {fileID: 5058587758433002409, guid: d1ff556a070774f54837b81b26a26724,
+    type: 3}
+  enemyDiceRoot: {fileID: 1554762252}
+  path: {fileID: 1844994914}
+  offsetPerSecond: 0.125
+--- !u!114 &1844994914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844994912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be44a1a9cea8c43c4b5022602f165e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPoint: {x: -1, y: 0, z: 0}
+  endPoint: {x: 1, y: 0, z: 0}
+  masterScaleX: 4
+  masterScaleY: 4
+  masterTranslationX: 0
+  masterTranslationY: -6
+--- !u!4 &1844994915
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844994912}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 265706618}
+  - {fileID: 1554762252}
+  m_Father: {fileID: 1330971539}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1878118482
 GameObject:
