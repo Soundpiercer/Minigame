@@ -1054,7 +1054,7 @@ MonoBehaviour:
     type: 3}
   enemyDiceRoot: {fileID: 1554762252}
   path: {fileID: 1844994914}
-  offsetPerSecond: 0.125
+  offsetPerSecond: 0.075
 --- !u!114 &1844994914
 MonoBehaviour:
   m_ObjectHideFlags: 0

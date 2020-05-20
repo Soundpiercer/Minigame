@@ -406,6 +406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc45cb0c83bc47a99797fc1a1064198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 50
+  power: 60
   attackInterval: 0.3
   beamQuad: {fileID: 2568576384291491712}
