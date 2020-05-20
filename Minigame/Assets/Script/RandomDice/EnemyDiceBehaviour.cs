@@ -4,53 +4,56 @@ using UnityEngine;
 
 using TMPro;
 
-public class EnemyDiceBehaviour : MonoBehaviour
+namespace RandomDice
 {
-    public int hp;
-    public int maxHP;
-    public TMP_Text hpText;
-
-    // the offset of the dice in the path. 0 to 1.
-    public float offset;
-
-    private PathFunction path;
-    private float offsetPerSecond;
-
-    private const float ONE_FRAME_FACTOR = 1f / 60f;
-
-    public void Init(PathFunction path, float offsetPerSecond)
+    public class EnemyDiceBehaviour : MonoBehaviour
     {
-        this.path = path;
-        this.offsetPerSecond = offsetPerSecond;
+        public int hp;
+        public int maxHP;
+        public TMP_Text hpText;
 
-        maxHP = hp;
-        hpText.text = hp.ToString();
+        // the offset of the dice in the path. 0 to 1.
+        public float offset;
 
-        StartCoroutine(MoveEnumerator());
-    }
+        private PathFunction path;
+        private float offsetPerSecond;
 
-    private IEnumerator MoveEnumerator()
-    {
-        while (true)
+        private const float ONE_FRAME_FACTOR = 1f / 60f;
+
+        public void Init(PathFunction path, float offsetPerSecond)
         {
-            offset += ONE_FRAME_FACTOR * offsetPerSecond;
-            transform.position = path.Lerp(offset);
+            this.path = path;
+            this.offsetPerSecond = offsetPerSecond;
 
-            yield return new WaitForSeconds(ONE_FRAME_FACTOR);
+            maxHP = hp;
+            hpText.text = hp.ToString();
+
+            StartCoroutine(MoveEnumerator());
         }
-    }
 
-    /// <summary>
-    /// get attacked
-    /// </summary>
-    public void ReduceHP(int amount)
-    {
-        hp = Mathf.Clamp(hp - amount, 0, maxHP);
-        hpText.text = hp.ToString();
-
-        if (hp <= 0)
+        private IEnumerator MoveEnumerator()
         {
-            Destroy(gameObject);
+            while (true)
+            {
+                offset += ONE_FRAME_FACTOR * offsetPerSecond;
+                transform.position = path.Lerp(offset);
+
+                yield return new WaitForSeconds(ONE_FRAME_FACTOR);
+            }
+        }
+
+        /// <summary>
+        /// get attacked
+        /// </summary>
+        public void ReduceHP(int amount)
+        {
+            hp = Mathf.Clamp(hp - amount, 0, maxHP);
+            hpText.text = hp.ToString();
+
+            if (hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
