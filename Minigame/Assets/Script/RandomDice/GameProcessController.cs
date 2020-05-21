@@ -29,33 +29,14 @@ namespace RandomDice
         private const int NUMBER_OF_SLOTS = 15;
         private const float STANDBY_TIME = 1.0f;
 
+        // Init. Called only once.
         public void Init()
         {
-            BuildStage();
-
-            InitDiceSlots();
-            InitRandomDiceManager();
-
-            StartCoroutine(GameProcessEnumerator());
-        }
-
-        public void InitNextPhase()
-        {
-            if (phaseNumber < RandomDiceManager.Instance.phases.Length)
-            {
-                BuildStage();
-                phaseNumber++;
-
-                StartCoroutine(GameProcessEnumerator());
-            }
-        }
-
-        private void InitRandomDiceManager()
-        {
-            RandomDiceManager.Instance.CurrentPhase = phase;
-
             RandomDiceManager.Instance.SP = 100;
             RandomDiceManager.Instance.RequiredSPToSpawn = 10;
+
+            InitDiceSlots();
+            StartNextPhase();
         }
 
         private void InitDiceSlots()
@@ -71,15 +52,23 @@ namespace RandomDice
             }
         }
 
-        private void BuildStage()
+        // Start Phase. Phase 1 ~
+        public void StartNextPhase()
         {
-            phase = RandomDiceManager.Instance.phases[phaseNumber];
-            phaseNumber = phase.phaseNumber;
+            // Phase 5 (phases[4]) is the end
+            if (phaseNumber >= RandomDiceManager.Instance.phases.Length)
+                return;
 
+            RandomDiceManager.Instance.CurrentPhase = RandomDiceManager.Instance.phases[phaseNumber];
+            phase = RandomDiceManager.Instance.CurrentPhase;
             RandomDiceManager.Instance.enemies = new List<EnemyDiceBehaviour>();
+            RandomDiceManager.Instance.PhaseKillCount = 0;
+
+            phaseNumber++;
+            StartCoroutine(StartEnemyMovementEnumerator());
         }
 
-        private IEnumerator GameProcessEnumerator()
+        private IEnumerator StartEnemyMovementEnumerator()
         {
             // standby
             yield return new WaitForSeconds(STANDBY_TIME);
@@ -94,6 +83,8 @@ namespace RandomDice
 
                 yield return new WaitForSeconds(phase.spawnInterval);
             }
+
+            yield break;
         }
 
         private void CreateEnemy()

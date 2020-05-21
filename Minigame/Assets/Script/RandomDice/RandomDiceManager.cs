@@ -20,7 +20,6 @@ namespace RandomDice
         #endregion
 
         public RandomDiceController controller;
-        [HideInInspector]
         public List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
         [HideInInspector]
         public Phase[] phases =
@@ -60,6 +59,19 @@ namespace RandomDice
             {
                 currentPhase = value;
                 controller.ShowPhaseNumber(currentPhase.phaseNumber);
+            }
+        }
+        private int phaseKillCount;
+        public int PhaseKillCount
+        {
+            get { return phaseKillCount; }
+            set
+            {
+                phaseKillCount = value;
+                if (phaseKillCount >= CurrentPhase.spawnAmount)
+                {
+                    controller.EnableNextPhaseButton();
+                }
             }
         }
     }

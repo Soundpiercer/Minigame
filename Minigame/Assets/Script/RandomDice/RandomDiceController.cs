@@ -10,6 +10,8 @@ namespace RandomDice
     {
         public GameProcessController gameProcessController;
         public GameObject addDiceButton;
+        public GameObject nextPhaseButton;
+
         public Text phaseText;
         public Text SPText;
         public Text requiredSPText;
@@ -24,9 +26,15 @@ namespace RandomDice
             gameProcessController.AddDiceAtRandomSlot();
         }
 
+        public void EnableNextPhaseButton()
+        {
+            nextPhaseButton.SetActive(true);
+        }
+
         public void NextPhase()
         {
-            gameProcessController.InitNextPhase();
+            nextPhaseButton.SetActive(false);
+            gameProcessController.StartNextPhase();
         }
 
         public void Exit()
@@ -34,6 +42,7 @@ namespace RandomDice
             SceneManager.LoadScene("Title");
         }
 
+        #region From RandomDiceManager
         public void ShowPhaseNumber(int phaseNumber)
         {
             phaseText.text = "Phase " + phaseNumber;
@@ -52,5 +61,6 @@ namespace RandomDice
 
             addDiceButton.SetActive(RandomDiceManager.Instance.SP >= RandomDiceManager.Instance.RequiredSPToSpawn);
         }
+        #endregion
     }
 }

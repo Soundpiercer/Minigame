@@ -18,6 +18,8 @@ namespace RandomDice
         private PathFunction path;
         private float offsetPerSecond;
 
+        private bool hasKilled;
+
         private const float ONE_FRAME_FACTOR = 1f / 60f;
 
         public void Init(PathFunction path, float offsetPerSecond)
@@ -52,13 +54,21 @@ namespace RandomDice
 
             if (hp <= 0)
             {
-                Retire();
+                Kill();
             }
         }
 
-        private void Retire()
+        private void Kill()
         {
+            if (hasKilled)
+                return;
+
+            hasKilled = true;
+
+            RandomDiceManager.Instance.enemies.Remove(this);
             RandomDiceManager.Instance.SP += 10;
+            RandomDiceManager.Instance.PhaseKillCount += 1;
+
             Destroy(gameObject);
         }
     }
