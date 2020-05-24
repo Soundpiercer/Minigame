@@ -12,9 +12,11 @@ namespace RandomDice
     [Serializable]
     public class ShooterDiceProperty
     {
-        public ShooterDiceProperty(ShooterDiceType shooterDiceType, int power, float attackInterval, Color bodyColor, Color beamColor)
+        public ShooterDiceProperty(ShooterDiceType shooterDiceType, int tier, int level, int power, float attackInterval, Color bodyColor, Color beamColor)
         {
             this.shooterDiceType = shooterDiceType;
+            this.tier = tier;
+            this.level = level;
             this.power = power;
             this.attackInterval = attackInterval;
             this.bodyColor = bodyColor;
@@ -22,6 +24,8 @@ namespace RandomDice
         }
 
         public ShooterDiceType shooterDiceType;
+        public int tier;
+        public int level;
         public int power;
         public float attackInterval;
         public Color bodyColor;

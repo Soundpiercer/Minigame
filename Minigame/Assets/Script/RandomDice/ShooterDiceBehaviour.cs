@@ -8,27 +8,25 @@ namespace RandomDice
     public class ShooterDiceBehaviour : MonoBehaviour
     {
         [SerializeField]
-        private ShooterDiceType type;
-        [SerializeField]
-        private int power;
-        [SerializeField]
-        private float attackInterval = 0.3f;
+        private ShooterDiceProperty property;
 
         public GameObject beamQuad;
 
         public void Init(ShooterDiceProperty property)
         {
-            type = property.shooterDiceType;
-            power = property.power;
-            attackInterval = property.attackInterval;
+            this.property = property;
 
+            SetMaterialColor();
+            StartCoroutine(AttackEnumerator());
+        }
+
+        private void SetMaterialColor()
+        {
             Material material = GetComponent<Renderer>().materials[0];
             material.color = property.bodyColor;
 
             Material beam = beamQuad.GetComponent<Renderer>().materials[0];
             beam.color = property.beamColor;
-
-            StartCoroutine(AttackEnumerator());
         }
 
         private IEnumerator AttackEnumerator()
@@ -43,10 +41,10 @@ namespace RandomDice
                     StartCoroutine(BeamAnimationEnumerator(transform, frontTarget.transform));
 
                     // Reduce Enemy HP
-                    frontTarget.ReduceHP(power);
+                    frontTarget.ReduceHP(property.power);
                 }
 
-                yield return new WaitForSeconds(attackInterval);
+                yield return new WaitForSeconds(property.attackInterval);
             }
         }
 
