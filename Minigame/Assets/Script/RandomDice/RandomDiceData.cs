@@ -12,7 +12,10 @@ namespace RandomDice
             new Phase(2, 15, 0.9f, 0.08f),
             new Phase(3, 20, 0.8f, 0.085f),
             new Phase(4, 25, 0.7f, 0.09f),
-            new Phase(5, 30, 0.6f, 0.095f)
+            new Phase(5, 30, 0.6f, 0.095f),
+            new Phase(6, 32, 0.56f, 1.05f),
+            new Phase(7, 35, 0.53f, 1.15f),
+            new Phase(8, 36, 0.5f, 1.25f)
         };
 
         public static ShooterDiceProperty[] shooterDiceProperties =
