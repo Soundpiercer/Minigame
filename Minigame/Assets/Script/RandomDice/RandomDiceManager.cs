@@ -20,10 +20,16 @@ namespace RandomDice
         #endregion
 
         public RandomDiceController controller;
+
+        public Phase[] phases;
         public List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
 
-        [HideInInspector]
-        public Phase[] phases = RandomDiceData.phases;
+        public void Init()
+        {
+            phases = RandomDiceData.phases;
+            SP = 100;
+            RequiredSPToSpawn = 10;
+        }
 
         private int sp;
         public int SP
@@ -62,7 +68,11 @@ namespace RandomDice
             set
             {
                 phaseKillCount = value;
-                if (phaseKillCount >= CurrentPhase.spawnAmount)
+
+                // don't enable next phase when
+                // player haven't killed all enemies
+                // player already reached the last phase
+                if (phaseKillCount >= CurrentPhase.spawnAmount && CurrentPhase.phaseNumber < phases.Length)
                 {
                     controller.EnableNextPhaseButton();
                 }
