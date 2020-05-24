@@ -113,8 +113,10 @@ namespace RandomDice
                 }
             }
 
-            // Instantiate Shooter Dice
-            Instantiate(shooterDicePrefab, targetSlot.position, Quaternion.identity, shooterDiceRoot);
+            // Instantiate Shooter Dice and Init
+            ShooterDiceBehaviour shooter = Instantiate(shooterDicePrefab, targetSlot.position, Quaternion.identity, shooterDiceRoot).GetComponent<ShooterDiceBehaviour>();
+            ShooterDiceProperty property = RandomDiceData.shooterDiceProperties[Random.Range(0, RandomDiceData.shooterDiceProperties.Length)];
+            shooter.Init(property);
             shooterCount++;
 
             // Increase Required SP To Spawn

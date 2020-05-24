@@ -14,5 +14,11 @@ namespace RandomDice
             new Phase(4, 25, 0.7f, 0.09f),
             new Phase(5, 30, 0.6f, 0.095f)
         };
+
+        public static ShooterDiceProperty[] shooterDiceProperties =
+        {
+            new ShooterDiceProperty(ShooterDiceType.Blue, 60, 0.6f, new Color(0, 0, 1, 1), new Color(1, 1, 0, 0)),
+            new ShooterDiceProperty(ShooterDiceType.Red, 30, 0.3f, new Color(1, 0, 0, 1), new Color(0, 1, 0, 0))
+        };
     }
 }

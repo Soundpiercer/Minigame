@@ -7,18 +7,26 @@ namespace RandomDice
 {
     public class ShooterDiceBehaviour : MonoBehaviour
     {
-        public int power;
-        public float attackInterval = 0.3f;
+        [SerializeField]
+        private ShooterDiceType type;
+        [SerializeField]
+        private int power;
+        [SerializeField]
+        private float attackInterval = 0.3f;
 
         public GameObject beamQuad;
 
-        private void Start()
+        public void Init(ShooterDiceProperty property)
         {
+            type = property.shooterDiceType;
+            power = property.power;
+            attackInterval = property.attackInterval;
+
             Material material = GetComponent<Renderer>().materials[0];
-            material.color = new Color(0, 0, 1, 1);
+            material.color = property.bodyColor;
 
             Material beam = beamQuad.GetComponent<Renderer>().materials[0];
-            beam.color = new Color(1, 1, 0, 1);
+            beam.color = property.beamColor;
 
             StartCoroutine(AttackEnumerator());
         }
