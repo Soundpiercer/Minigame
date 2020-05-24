@@ -26,15 +26,20 @@ namespace RandomDice
             gameProcessController.AddDiceAtRandomSlot();
         }
 
-        public void EnableNextPhaseButton()
+        public void SetAddDiceButtonActive(bool isActive)
         {
-            nextPhaseButton.SetActive(true);
+            addDiceButton.SetActive(isActive);
         }
 
         public void NextPhase()
         {
             nextPhaseButton.SetActive(false);
             gameProcessController.StartNextPhase();
+        }
+
+        public void SetNextPhaseButtonActive(bool isActive)
+        {
+            nextPhaseButton.SetActive(isActive);
         }
 
         public void SetTimeScale(int factor)
@@ -57,15 +62,11 @@ namespace RandomDice
         public void ShowSP(int sp)
         {
             SPText.text = "SP : " + sp;
-
-            addDiceButton.SetActive(RandomDiceManager.Instance.SP >= RandomDiceManager.Instance.RequiredSPToSpawn);
         }
 
         public void ShowRequiredSPToSpawn(int requiredSPToSpawn)
         {
             requiredSPText.text = "Required SP : " + requiredSPToSpawn;
-
-            addDiceButton.SetActive(RandomDiceManager.Instance.SP >= RandomDiceManager.Instance.RequiredSPToSpawn);
         }
         #endregion
     }

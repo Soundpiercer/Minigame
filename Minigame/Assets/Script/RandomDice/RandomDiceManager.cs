@@ -39,6 +39,7 @@ namespace RandomDice
             {
                 sp = value;
                 controller.ShowSP(sp);
+                controller.SetAddDiceButtonActive(SP >= RequiredSPToSpawn);
             }
         }
         private int requiredSPToSpawn;
@@ -49,6 +50,7 @@ namespace RandomDice
             {
                 requiredSPToSpawn = value;
                 controller.ShowRequiredSPToSpawn(requiredSPToSpawn);
+                controller.SetAddDiceButtonActive(SP >= RequiredSPToSpawn);
             }
         }
         private Phase currentPhase;
@@ -74,7 +76,7 @@ namespace RandomDice
                 // player already reached the last phase
                 if (phaseKillCount >= CurrentPhase.spawnAmount && CurrentPhase.phaseNumber < phases.Length)
                 {
-                    controller.EnableNextPhaseButton();
+                    controller.SetNextPhaseButtonActive(true);
                 }
             }
         }
