@@ -29,13 +29,6 @@ namespace RandomDice
         private const int NUMBER_OF_SLOTS = 15;
         private const float STANDBY_TIME = 1.0f;
 
-#if UNITY_EDITOR
-        private void Start()
-        {
-            Time.timeScale = 3f;
-        }
-#endif
-
         // Init. Called only once.
         public void Init()
         {

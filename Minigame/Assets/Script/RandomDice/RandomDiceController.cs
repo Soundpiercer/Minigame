@@ -37,8 +37,14 @@ namespace RandomDice
             gameProcessController.StartNextPhase();
         }
 
+        public void SetTimeScale(int factor)
+        {
+            Time.timeScale = factor;
+        }
+
         public void Exit()
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene("Title");
         }
 
