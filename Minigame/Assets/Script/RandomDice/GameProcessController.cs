@@ -115,7 +115,9 @@ namespace RandomDice
             ShooterDiceBehaviour shooter = Instantiate(shooterDicePrefab, targetSlot.position, Quaternion.identity, shooterDiceRoot).GetComponent<ShooterDiceBehaviour>();
             ShooterDiceProperty property = RandomDiceData.shooterDiceProperties[Random.Range(0, RandomDiceData.shooterDiceProperties.Length)];
             shooter.Init(property);
+            
             shooterCount++;
+            RandomDiceManager.Instance.shooters.Add(shooter);
 
             // Increase Required SP To Spawn
             RandomDiceManager.Instance.SP -= RandomDiceManager.Instance.RequiredSPToSpawn;

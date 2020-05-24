@@ -22,6 +22,7 @@ namespace RandomDice
         public RandomDiceController controller;
 
         public Phase[] phases;
+        public List<ShooterDiceBehaviour> shooters = new List<ShooterDiceBehaviour>();
         public List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
 
         public void Init()
