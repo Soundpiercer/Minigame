@@ -50,6 +50,7 @@ namespace RandomDice
 
                 ShooterDiceProperty property =
                     RandomDiceData.shooterDiceProperties.ToList().Find(s =>
+                    s.shooterDiceType == shooter.property.shooterDiceType &&
                     s.tier == shooter.property.tier &&
                     s.level == shooterLevels[diceType]
                     );
