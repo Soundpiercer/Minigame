@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -45,6 +43,12 @@ namespace RandomDice
         public void SetTimeScale(int factor)
         {
             Time.timeScale = factor;
+        }
+
+        public void DiceLevelUp(int diceTypeByInt)
+        {
+            ShooterDiceType diceType = (ShooterDiceType)diceTypeByInt;
+            RandomDiceManager.Instance.DiceLevelUp(diceType);
         }
 
         public void Exit()

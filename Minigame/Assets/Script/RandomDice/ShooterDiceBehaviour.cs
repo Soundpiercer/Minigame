@@ -2,19 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace RandomDice
 {
     public class ShooterDiceBehaviour : MonoBehaviour
     {
-        [SerializeField]
-        private ShooterDiceProperty property;
+        public ShooterDiceProperty property;
 
         public GameObject beamQuad;
+        public TMP_Text levelText;
 
         public void Init(ShooterDiceProperty property)
         {
             this.property = property;
+            levelText.text = "Lv." + property.level;
 
             SetMaterialColor();
             StartCoroutine(AttackEnumerator());

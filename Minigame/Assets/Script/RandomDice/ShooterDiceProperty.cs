@@ -6,7 +6,7 @@ namespace RandomDice
     public enum ShooterDiceType
     {
         Blue = 0,
-        Red,
+        Red = 1,
     }
 
     [Serializable]
