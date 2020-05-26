@@ -41,8 +41,20 @@ namespace RandomDice
 
         public void DiceLevelUp(ShooterDiceType diceType)
         {
-            shooterLevels[diceType] += 1;
+            // if the dice already reached the maximum level, return
+            if (shooterLevels[diceType] == 5)
+                return;
 
+            // Minimum required SP is 100
+            if (SP < 100)
+                return;
+
+            SP -= 100;
+
+            // Level Up to managed data
+            shooterLevels[diceType] = Mathf.Clamp(shooterLevels[diceType] + 1, 1, 5);
+
+            // Level Up currently active shooter dice
             foreach (ShooterDiceBehaviour shooter in shooters)
             {
                 if (shooter.property.shooterDiceType != diceType)
@@ -58,8 +70,6 @@ namespace RandomDice
                 if (property != null)
                     shooter.Init(property);
             }
-
-            SP -= 100;
         }
 
         private int sp;
