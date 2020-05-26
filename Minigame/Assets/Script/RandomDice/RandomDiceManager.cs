@@ -45,6 +45,9 @@ namespace RandomDice
 
             foreach (ShooterDiceBehaviour shooter in shooters)
             {
+                if (shooter.property.shooterDiceType != diceType)
+                    continue;
+
                 ShooterDiceProperty property =
                     RandomDiceData.shooterDiceProperties.ToList().Find(s =>
                     s.tier == shooter.property.tier &&
@@ -54,6 +57,8 @@ namespace RandomDice
                 if (property != null)
                     shooter.Init(property);
             }
+
+            SP -= 100;
         }
 
         private int sp;
