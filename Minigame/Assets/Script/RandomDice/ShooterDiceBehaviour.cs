@@ -7,8 +7,7 @@ namespace RandomDice
 {
     public class ShooterDiceBehaviour : MonoBehaviour
     {
-        [SerializeField]
-        private ShooterDiceProperty property;
+        public ShooterDiceProperty property;
 
         public GameObject beamQuad;
 
