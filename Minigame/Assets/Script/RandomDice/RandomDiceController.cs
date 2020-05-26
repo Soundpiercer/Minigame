@@ -1,8 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -52,17 +48,7 @@ namespace RandomDice
         public void DiceLevelUp(int diceTypeByInt)
         {
             ShooterDiceType diceType = (ShooterDiceType)diceTypeByInt;
-            foreach (ShooterDiceBehaviour shooter in RandomDiceManager.Instance.shooters)
-            {
-                ShooterDiceProperty newProperty =
-                    RandomDiceData.shooterDiceProperties.ToList().Find(s =>
-                    s.tier == shooter.property.tier &&
-                    s.level == shooter.property.level + 1
-                    );
-
-                if (newProperty != null)
-                    shooter.Init(newProperty);
-            }
+            RandomDiceManager.Instance.DiceLevelUp(diceType);
         }
 
         public void Exit()

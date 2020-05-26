@@ -1,7 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 
 namespace RandomDice
 {
@@ -23,13 +24,36 @@ namespace RandomDice
 
         public Phase[] phases;
         public List<ShooterDiceBehaviour> shooters = new List<ShooterDiceBehaviour>();
+        public Dictionary<ShooterDiceType, int> shooterLevels = new Dictionary<ShooterDiceType, int>();
         public List<EnemyDiceBehaviour> enemies = new List<EnemyDiceBehaviour>();
-
+        
         public void Init()
         {
             phases = RandomDiceData.phases;
+            foreach (string s in Enum.GetNames(typeof(ShooterDiceType)))
+            {
+                shooterLevels.Add((ShooterDiceType)Enum.Parse(typeof(ShooterDiceType), s), 1);
+            }
+
             SP = 100;
             RequiredSPToSpawn = 10;
+        }
+
+        public void DiceLevelUp(ShooterDiceType diceType)
+        {
+            shooterLevels[diceType] += 1;
+
+            foreach (ShooterDiceBehaviour shooter in shooters)
+            {
+                ShooterDiceProperty property =
+                    RandomDiceData.shooterDiceProperties.ToList().Find(s =>
+                    s.tier == shooter.property.tier &&
+                    s.level == shooterLevels[diceType]
+                    );
+
+                if (property != null)
+                    shooter.Init(property);
+            }
         }
 
         private int sp;

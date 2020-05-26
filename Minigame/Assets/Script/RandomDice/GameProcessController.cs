@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,6 +39,7 @@ namespace RandomDice
             StartNextPhase();
         }
 
+        // assume that slots are positioned in a 5 x 3 order.
         private void InitDiceSlots()
         {
             diceSlots = new DiceSlot[NUMBER_OF_SLOTS];
@@ -102,7 +105,7 @@ namespace RandomDice
 
             while (true)
             {
-                int index = Random.Range(0, NUMBER_OF_SLOTS);
+                int index = UnityEngine.Random.Range(0, NUMBER_OF_SLOTS);
                 if (diceSlots[index].isOccupied == false)
                 {
                     diceSlots[index].isOccupied = true;
@@ -111,9 +114,16 @@ namespace RandomDice
                 }
             }
 
-            // Instantiate Shooter Dice and Init
+            // Instantiate Shooter Dice and Init.
+            // Randomly gets the dice type -> find a property that matches the current dice level
             ShooterDiceBehaviour shooter = Instantiate(shooterDicePrefab, targetSlot.position, Quaternion.identity, shooterDiceRoot).GetComponent<ShooterDiceBehaviour>();
-            ShooterDiceProperty property = RandomDiceData.shooterDiceProperties[Random.Range(0, RandomDiceData.shooterDiceProperties.Length)];
+            ShooterDiceType type = (ShooterDiceType)UnityEngine.Random.Range(0, Enum.GetNames(typeof(ShooterDiceType)).Length);
+            ShooterDiceProperty property =
+                RandomDiceData.shooterDiceProperties.ToList().Find(p =>
+                p.shooterDiceType == type &&
+                p.level == RandomDiceManager.Instance.shooterLevels[type]
+                );
+
             shooter.Init(property);
             
             shooterCount++;
