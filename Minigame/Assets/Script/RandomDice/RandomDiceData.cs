@@ -23,11 +23,15 @@ namespace RandomDice
         public static ShooterDiceProperty[] shooterDiceProperties =
         {
             new ShooterDiceProperty(ShooterDiceType.Blue, 1, 1, 60, 0.6f, new Color(0, 0, 1, 1), new Color(1, 1, 0, 0)),
-            new ShooterDiceProperty(ShooterDiceType.Blue, 1, 2, 600, 0.6f, new Color(0, 0, 1, 1), new Color(1, 1, 0, 0)),
-            new ShooterDiceProperty(ShooterDiceType.Blue, 1, 3, 6000, 0.6f, new Color(0, 0, 1, 1), new Color(1, 1, 0, 0)),
+            new ShooterDiceProperty(ShooterDiceType.Blue, 1, 2, 70, 0.6f, new Color(0, 0, 1, 1), new Color(1, 1, 0, 0)),
+            new ShooterDiceProperty(ShooterDiceType.Blue, 1, 3, 80, 0.6f, new Color(0, 0, 1, 1), new Color(1, 1, 0, 0)),
+            new ShooterDiceProperty(ShooterDiceType.Blue, 1, 4, 90, 0.6f, new Color(0, 0, 1, 1), new Color(1, 1, 0, 0)),
+            new ShooterDiceProperty(ShooterDiceType.Blue, 1, 5, 100, 0.6f, new Color(0, 0, 1, 1), new Color(1, 1, 0, 0)),
             new ShooterDiceProperty(ShooterDiceType.Red, 1, 1, 30, 0.3f, new Color(1, 0, 0, 1), new Color(0, 1, 0, 0)),
-            new ShooterDiceProperty(ShooterDiceType.Red, 1, 2, 30, 0.3f, new Color(1, 0, 0, 1), new Color(0, 1, 0, 0)),
-            new ShooterDiceProperty(ShooterDiceType.Red, 1, 3, 30, 0.3f, new Color(1, 0, 0, 1), new Color(0, 1, 0, 0))
+            new ShooterDiceProperty(ShooterDiceType.Red, 1, 2, 35, 0.3f, new Color(1, 0, 0, 1), new Color(0, 1, 0, 0)),
+            new ShooterDiceProperty(ShooterDiceType.Red, 1, 3, 40, 0.3f, new Color(1, 0, 0, 1), new Color(0, 1, 0, 0)),
+            new ShooterDiceProperty(ShooterDiceType.Red, 1, 4, 40, 0.3f, new Color(1, 0, 0, 1), new Color(0, 1, 0, 0)),
+            new ShooterDiceProperty(ShooterDiceType.Red, 1, 5, 40, 0.3f, new Color(1, 0, 0, 1), new Color(0, 1, 0, 0))
         };
     }
 }
